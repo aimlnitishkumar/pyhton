@@ -1733,11 +1733,97 @@ print(account1.check_balance())
 # Total cost
 # Different room types
 
+class Room:
+    def __init__(self, room_number, room_type, price_per_night, availability=True):
+        self.room_number = room_number
+        self.room_type = room_type
+        self.price_per_night = price_per_night
+        self.availability = availability
+    def show_room(self):
+        print(
+            f"Room number : {self.room_number},"
+            f"Room type : {self.room_type},"
+            f"Price per nights : {self.price_per_night}"
+        )
+class Customer:
+    def __init__(self, customer_id, name):
+        self.customer_id = customer_id
+        self.name = name
+        self.bookings = []
+class Booking:
+    def __init__(self, booking_id, customer, room, no_of_nights):
+        self.booking_id = booking_id
+        self.customer = customer
+        self.room = room
+        self.no_of_nights = no_of_nights
+        self.status = "Booked"
+    def calculate_total(self):
+        total = self.room.price_per_night * self.no_of_nights
+        return total
+
+class Hotel:
+    def __init__(self):
+        self.rooms = {}
+        self.customers = {}
+        self.bookings = {}
+    def add_room(self, room):
+        self.rooms[room.room_number] = room
+    def add_customer(self, customer):
+        self.customers[customer.customer_id] = customer
+    def book_room(self, booking_id, customer_id, room_number, no_of_nights):
+        if customer_id not in self.customers:
+            return "Customer not found."
+        customer = self.customers[customer_id]
+
+        if room_number not in self.rooms:
+            return "Room not found."
+        room = self.rooms[room_number]
+
+        if not room.availability:
+            return "Room is not available."
+
+        booking =Booking(
+            booking_id,
+            customer,
+            room,
+            no_of_nights
+        )
+
+        self.bookings[booking_id] = booking
+        customer.bookings.append(booking)
+
+        room.availability = False
+
+        return "Room booked successfully."
+
+    def cancel_booking(self, booking_id):
+        if booking_id not in self.bookings:
+            return "Booking not found."
+        booking = self.bookings[booking_id]
+
+        if booking.status == "Cancelled":
+            return "Booked is already cancelled."
+
+        booking.status = "Cancelled"
+        booking.room.availability = True
+
+        return "Booking cancelled successfully."
+
+
+    
 
 
 
+room1 = Room(101, "Single", 500, True)
+room2 = Room(102, "Double", 1000, True)
 
+customer1 = Customer(1, "Nitish")
 
+hotel = Hotel()
+
+hotel.add_room(room1)
+hotel.add_room(room2)
+hotel.add_customer(customer1)
 
 
 # 9. 📚 Library Management System

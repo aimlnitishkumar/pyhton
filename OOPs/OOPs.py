@@ -1733,7 +1733,7 @@ print(account1.check_balance())
 # Total cost
 # Different room types
 
-class Room:
+'''class Room:
     def __init__(self, room_number, room_type, price_per_night, availability=True):
         self.room_number = room_number
         self.room_type = room_type
@@ -1809,21 +1809,121 @@ class Hotel:
 
         return "Booking cancelled successfully."
 
+    def check_in(self, booking_id):
+        if booking_id not in self.bookings:
+            return "Booking not found."
+        booking = self.bookings[booking_id]
 
-    
+        if booking.status != "Booked":
+            return "Booking cannot be checked in."
+        booking.status = "Checked-in"
+
+        return "Check-in successful."
+
+    def check_out(self, booking_id):
+        if booking_id not in self.bookings:
+            return "Booking not found."
+        booking = self.bookings[booking_id]
+
+        if booking.status != "Checked-in":
+            return "Booking is not checked-in."
+
+        booking.status ="Checked-out"
+        booking.room.availability = True
+
+        return "Check-out successful."
+
+    def show_available_rooms(self):
+        found = False
+        for room in self.rooms.values():
+            if room.availability:
+                print(
+                    f"Room Number : {room.room_number} | "
+                    f"Type : {room.room_type} | "
+                    f"Price/Night: {room.price_per_night}"
+                )
+                found = True
+        if not found:
+            print("No rooms available.")
 
 
+# Create rooms
+room1 = Room(101, "Single", 500)
+room2 = Room(102, "Double", 1000)
+room3 = Room(103, "Deluxe", 2000)
 
-room1 = Room(101, "Single", 500, True)
-room2 = Room(102, "Double", 1000, True)
+# Create customers
 
 customer1 = Customer(1, "Nitish")
+customer2 = Customer(2, "Rahul")
+
+# Create hotel
 
 hotel = Hotel()
 
+# Add rooms and customers
+
 hotel.add_room(room1)
 hotel.add_room(room2)
+hotel.add_room(room3)
+
 hotel.add_customer(customer1)
+hotel.add_customer(customer2)
+
+# Show available rooms
+
+print("\n --- Available rooms---")
+hotel.show_available_rooms()
+
+
+# Book rooms
+
+print("\n -- Booking---")
+
+print(
+    hotel.book_room(
+        1001,
+        1,
+        103,
+        3
+    )
+)
+
+
+# Calculate total
+
+booking = hotel.bookings[1001]
+
+print("\n --- Bill----")
+print("Total Cost:", booking.calculate_total())
+
+
+
+# Show available rooms again 
+
+print("\n ---- Available rooms after booking----")
+hotel.show_available_rooms()
+
+# Check-in
+
+print("\n--- Check in ---")
+print(hotel.check_in(1001))
+
+# Check out
+
+print("\n --- Check out---")
+print(hotel.check_out(1001))
+
+# Show avialable rooms again 
+
+print("\n---Available rooms after check-out---")
+hotel.show_available_rooms()
+
+# Cancel booking 
+
+print("\n --- Cancel Booking -- ")
+print(hotel.cancel_booking(1001))
+'''
 
 
 # 9. 📚 Library Management System
@@ -1844,6 +1944,97 @@ hotel.add_customer(customer1)
 # Challenge:
 
 # Late days × ₹10
+
+
+'''class Book:
+    def __init__(self, book_id, title, author):
+        self.book_id = book_id
+        self.title = title
+        self.author = author
+        self.available = True
+
+class Member:
+    def __init__(self, member_id, name):
+        self.member_id = member_id
+        self.name = name
+        self.borrowed_books = []
+class Library:
+    def __init__(self):
+        self.books = {}
+        self.members = {}
+
+    def add_book(self, book):
+        self.books[book.book_id] = book
+    def add_member(self, member):
+        self.members[member.member_id] = member
+    def borrow_book(self, member_id, book_id):
+        if member_id not in self.members:
+            return "Member not exists."
+        member = self.members[member_id]
+
+        if book_id not in self.books:
+            return "Book not found."
+        book = self.books[book_id]
+
+        if not book.available:
+            return "Book already Borrowed."
+        if len(member.borrowed_books) >=3:
+            return "You cannot access more than 3 books."
+
+        member.borrowed_books.append(book)
+        book.available = False
+
+        return f"{book.title} borrowed successfully."
+
+    
+    def return_book(self, member_id, book_id):
+        if member_id not in self.members:
+            return "Member not exists."
+        member = self.members[member_id]
+
+        if book_id not in self.books:
+            return "Book not found."
+        book = self.books[book_id]
+
+        if book not in member.borrowed_books:
+            return "This member has not borrowed this book."
+
+        member.borrowed_books.remove(book)
+        book.available = True
+
+        return f"{book.title} returned successfully."
+
+    def calculate_late_fee(self, late_days):
+        return late_days * 10
+
+book1 = Book(1001, "A Lot Word", "Nittyshry Prabhu")
+book2 = Book(1002, "The Mountain is You", "Great Mind")
+
+
+member1 = Member(1, "Nitish")
+member2 = Member(2, "Sohan")
+
+
+library = Library()
+
+library.add_book(book1)
+library.add_book(book2)
+
+library.add_member(member1)
+library.add_member(member2)
+
+
+print(library.borrow_book(1, 1001))
+print(library.borrow_book(1, 1002))
+
+
+print(library.return_book(1, 1001))
+
+print(library.calculate_late_fee(5))
+'''
+
+
+
 # 🎯 Your progression
 
 # I recommend this order:
@@ -1876,3 +2067,5 @@ hotel.add_customer(customer1)
 # 8. Hotel
 #     ↓
 # 9. Library
+
+

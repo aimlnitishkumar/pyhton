@@ -1,18 +1,12 @@
-nums = [5, 1, 2, 3, 1]
+nums = [7, 3, 5, 2, 4]
 
-def SortArray(nums: list[int]) -> list[int]:
+n = len(nums)
 
-    n = len(nums)
-    # print(n)
+for i in range(n):
+    for j in range(0, n-i-1):
+        if nums[j] > nums[j+1]:
+            nums[j], nums[j+1] = nums[j+1], nums[j]
 
-    for i in range(n):
-        # print(i)
-        for j in range(0, n - i - 1):
-            # print(j)
+print(nums)
 
-            if nums[j] > nums[j + 1]:
-                nums[j], nums[j + 1] = nums[j + 1], nums[j]
 
-    return nums
-
-print(SortArray(nums))

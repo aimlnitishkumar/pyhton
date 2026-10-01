@@ -2069,3 +2069,58 @@ print(library.calculate_late_fee(5))
 # 9. Library
 
 
+
+# 🟢 Level 3 OOP Problems
+
+# Level 3 — OOP Roadmap
+# We'll go in this order:
+# #
+# Project
+# Main Concept
+
+
+# 1
+# 🚗 Vehicle Rental System
+# Inheritance + Method Overriding
+
+# 2
+# 👨‍💼 Employee Payroll
+# Inheritance + Polymorphism
+# 3
+# 💳 Payment System
+# Polymorphism
+# 4
+# 🛒 E-Commerce Products
+# Inheritance + Overriding
+# 5
+# 🏦 Advanced Banking
+# Encapsulation + @property
+
+class Vehical:
+    def start(self):
+        print("Started")
+
+class Car(Vehical):
+    pass
+car = Car()
+car.start()
+v1 = Vehical()
+v1.start()
+
+# 6
+# 🔔 Notification System
+# Abstract Classes
+# 7
+# 🚚 Delivery System
+# Polymorphism + Composition
+# 8
+# 🏥 Hospital 2.0
+# Inheritance + Composition
+# 9
+# 🎓 University System
+# Multiple Classes + Abstraction
+# 10
+# 🏢 Mini Company Management
+# Everything together
+
+

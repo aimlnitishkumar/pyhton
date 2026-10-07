@@ -2096,16 +2096,15 @@ print(library.calculate_late_fee(5))
 # 🏦 Advanced Banking
 # Encapsulation + @property
 
-class Vehical:
-    def start(self):
-        print("Started")
+class BankAccount:
+    def __init__(self, account_number, account_holder, balance):
+        self.account_number = account_number
+        self.account_holder = account_holder
+        self.balance = balance
 
-class Car(Vehical):
-    pass
-car = Car()
-car.start()
-v1 = Vehical()
-v1.start()
+    
+
+
 
 # 6
 # 🔔 Notification System

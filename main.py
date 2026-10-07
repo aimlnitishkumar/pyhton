@@ -42,3 +42,18 @@ else:
     
     if temp == sum :
         print("Armstrong number", temp)'''
+
+# how many of them contain an even number of digits.
+nums = [12,345,2,6,7896]
+
+even = 0
+odd = 0
+
+for num in nums:
+    if len(str(num)) % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+
+print("Even digit numbers:", even)
+print("Odd digit numbers:", odd)

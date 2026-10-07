@@ -1,5 +1,19 @@
 
 # Linear Search Apporach
+'''def linear_search(nums:list[int], target: int) -> str:
+
+    for num in nums:
+        if num == target:
+            return f"Successful Searched element {target}"
+       
+    return f"UnSuccessful Searched element {target}"
+
+nums = [1, 8, 9, 45, 78, 9, 11, 56]
+target = 11
+
+result = linear_search(nums, target)
+print(result)
+'''
 
 # Find the First Occurrence
 '''nums = [5, 3, 7, 3, 9, 3]

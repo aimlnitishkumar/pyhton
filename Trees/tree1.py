@@ -237,7 +237,7 @@ inorder(root)'''
 
 
 
-class TreeNode:
+'''class TreeNode:
     def __init__(self, data):
         self.data = data
         self.left = None
@@ -332,4 +332,89 @@ inorder(root)
 print()
 print(delete(root, 25))
 print()
+inorder(root)
+'''
+
+
+
+class TreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder(root):
+    if root is None:
+        return
+
+    inorder(root.left)
+    print(root.data, end=" ")
+    inorder(root.right)
+
+def search(root, target):
+    if root is None:
+        return False
+    if target == root.data:
+        return True
+    if target > root.data:
+        return search(root.right, target)
+    return search(root.left, target)
+
+def insert(root, value):
+    if root is None:
+        return TreeNode(value)
+
+    if value > root.data:
+        root.right = insert(root.right, value)
+    if value < root.data:
+        root.left = insert(root.left, value)
+
+    return root
+
+def delete(root, value):
+    if root is None:
+        return None
+    if value < root.data:
+        root.left = delete(root.left, value)
+    if value > root.data:
+        root.right = delete(root.right, value)
+    else:
+        if root.left is None:
+            return root.right
+        if root.right is None:
+            return root.left
+
+        successor = root.right
+
+        while successor.left:
+            successor = successor.left
+
+        root.data = successor.data
+        root.right = delete(root.right, successor.data)
+
+    return root
+
+
+root = TreeNode(10)
+
+root.left = TreeNode(5)
+root.right = TreeNode(15)
+
+root.left.left = TreeNode(3)
+root.left.right = TreeNode(7)
+
+root.right.left = TreeNode(12)
+root.right.right = TreeNode(20)
+
+
+inorder(root)
+
+print(search(root, 8))
+print()
+insert(root, 25)
+print()
+inorder(root)
+print()
+delete(root, 25)
+
 inorder(root)

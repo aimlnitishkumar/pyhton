@@ -297,15 +297,15 @@ mylist.inser_at_position(50, 2)
 
 mylist.display()'''
 
+# display, insert_beginning, insert_end, insert_at_posiotion, delete_beginning, delete_end, delete_at_position
 
-class Node:
+'''class Node:
     def __init__(self, data):
         self.data = data
         self.next = None
 class LinkedList:
     def __init__(self):
         self.head = None
-
     def display(self):
         current = self.head
 
@@ -313,36 +313,107 @@ class LinkedList:
             print(current.data, end=" ")
             current = current.next
         print("None")
+
+    def insert_at_beginning(self, data):
+        new_node = Node(data)
+
+        new_node.next = self.head
+        self.head = new_node
+
+    def insert_at_end(self, data):
+        new_node = Node(data)
+
+        if self.head is None:
+            self.head = new_node
+            return
+
+        current = self.head
+
+        while current.next is not None:
+            current = current.next
+
+        current.next = new_node
+    def insert_at_position(self, data, position):
+        if position < 1:
+            print("Invalid Postion")
+            return
+        new_node = Node(data)
+
+        if position == 1:
+            new_node.next = self.head
+            self.next = new_node
+            return new_node
+
+        current = self.head
+        count = 1
+
+        while current.next is not None and count < position - 1 :
+            current = current.next
+            count += 1
+
+        if current is None:
+            print("Invalid Postion")
+            return
+           
+
+        new_node.next = current.next
+        current.next = new_node
+
+        
     def delete_beginning(self):
         if self.head is None:
-            print("List is empty")
+            print("Emply list")
             return
         self.head = self.head.next
+
     def delete_end(self):
         if self.head is None:
-            print("List is empty")
+            print("Empty list")
             return
         if self.head.next is None:
             self.head = None
             return
+
         current = self.head
 
         while current.next.next is not None:
-            current  =  current.next
+            current = current.next
         current.next = None
 
     def delete_at_position(self, position):
-        
+        if position < 1 and self.head is None:
+            print("Invalid position or empty list")
+            return
+
+        if position == 1:
+            self.head = self.head.next
+            return
+        current = self.head
+        count = 1
+
+        while current is not None and count < position-1:
+            current = current.next
+            count += 1
+
+        current.next = current.next.next
+
 
 mylist = LinkedList()
 
-node1 = Node(10)
-node2 = Node(20)
-node3 = Node(30)
+mylist.insert_at_beginning(40)
+mylist.insert_at_beginning(30)
+mylist.insert_at_beginning(20)
+mylist.insert_at_beginning(10)
 
 
-mylist.head = node1
-node1.next = node2
-node2.next = node3
+mylist.insert_at_end(50)
+mylist.insert_at_end(60)
 
-mylist.display()
+mylist.insert_at_position(45, 5)
+mylist.insert_at_position(65, 8)
+
+mylist.delete_beginning()
+mylist.delete_end()
+mylist.delete_at_position(3)
+
+mylist.display()'''
